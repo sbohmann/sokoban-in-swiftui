@@ -57,7 +57,40 @@ struct WallView: View {
             Self.darkPath
                 .fill(Color(white: 0.3))
                 .frame(width: 20, height: 20)
-        }
-            .compositingGroup()
+        }.compositingGroup()
+    }
+}
+
+
+struct OpenView: View {
+    var body: some View {
+        Rectangle()
+            .fill(Color(white: 0.87))
+            .frame(width: 20, height: 20)
+    }
+}
+
+
+struct TargetView: View {
+    var body: some View {
+        Rectangle()
+            .fill(Color(red: 80, green: 0.6, blue: 0.7))
+            .frame(width: 20, height: 20)
+    }
+}
+
+struct PlayerView: View {
+    var body: some View {
+        Circle()
+            .fill(.red)
+            .frame(width: 15, height: 15)
+    }
+}
+
+struct BoxView: View {
+    var body: some View {
+        Rectangle()
+            .fill(.brown)
+            .frame(width: 15, height: 15)
     }
 }
