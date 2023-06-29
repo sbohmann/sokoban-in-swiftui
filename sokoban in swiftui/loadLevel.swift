@@ -6,7 +6,6 @@ func loadLevel(_ number: Int) -> LevelData {
     let lines = levelDescription
         .split(separator: "\n")
         .map({ line in [Unicode.Scalar](line.unicodeScalars) })
-    print(lines)
     let width = lines.reduce(0, { sum, line in max(sum, line.count) })
     let height = lines.count
     var map = [Field]()
@@ -49,6 +48,10 @@ func loadLevel(_ number: Int) -> LevelData {
                 map.append(.open)
             }
         }
+    }
+    
+    if (map.count != width * height) {
+        fatalError("map size is off")
     }
     
     return LevelData(width:width,
