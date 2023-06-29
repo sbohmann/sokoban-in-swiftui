@@ -1,11 +1,9 @@
 import Foundation
 
 func loadLevel(_ number: Int) -> LevelData {
-    print("Current directory: [\(Bundle.main.path(forResource: "level1.txt", ofType: nil) ?? "none")]")
-    let path = "level\(number).txt"
-    if !FileManager.default.fileExists(atPath: path) {
-        fatalError("Resource not found [\(path)]")
-    }
+    let levelFilePath = Bundle.main.path(forResource: "level\(number).txt", ofType: nil)!
+    let levelDescription = try! String(contentsOfFile: levelFilePath)
+    print(levelDescription.split(separator: "\n"))
     return LevelData(width:10, height: 10,
                      map:
                      [.wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall,
