@@ -9,9 +9,9 @@ struct Level: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ForEach(0 ..< 10) { y in
+            ForEach(0 ..< game.data.height) { y in
                 HStack(spacing: 0) {
-                    ForEach(0 ..< 10) { x in
+                    ForEach(0 ..< game.data.width) { x in
                         FieldView(data: game.data, position: (Position(x: x, y: y)))
                     }
                 }
@@ -51,7 +51,7 @@ private struct FieldView: View {
                 TargetView()
             }
             if (data.box(position)) {
-                BoxView()
+                BoxView(onTarget: data.target(position))
             }
             if (position == data.player) {
                 PlayerView()

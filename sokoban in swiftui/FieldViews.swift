@@ -88,9 +88,10 @@ struct PlayerView: View {
 }
 
 struct BoxView: View {
+    let onTarget: Bool
     var body: some View {
         Rectangle()
-            .fill(.brown)
+            .fill(onTarget ? .green : .brown)
             .frame(width: 15, height: 15)
     }
 }

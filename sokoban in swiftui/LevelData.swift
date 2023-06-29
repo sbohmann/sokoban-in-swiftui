@@ -31,6 +31,10 @@ struct LevelData {
         return boxes.contains(position)
     }
     
+    func target(_ position: Position) -> Bool {
+        return get(position) == .target
+    }
+    
     mutating func moveBox(from: Position, to: Position) {
         if let index = boxes.firstIndex(of: from) {
             boxes[index] = to
