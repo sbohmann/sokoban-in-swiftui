@@ -8,13 +8,19 @@ struct Level: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            ForEach(0 ..< game.data.height) { y in
-                HStack(spacing: 0) {
-                    ForEach(0 ..< game.data.width) { x in
-                        FieldView(data: game.data, position: (Position(x: x, y: y)))
-                    }
-                }
+        VStack {
+            ScrollView(.vertical) {
+                ScrollView(.horizontal) {
+                    VStack(spacing: 0) {
+                        ForEach(0 ..< game.data.height) { y in
+                            HStack(spacing: 0) {
+                                ForEach(0 ..< game.data.width) { x in
+                                    FieldView(data: game.data, position: (Position(x: x, y: y)))
+                                }
+                            }
+                        }
+                    }.frame(width: CGFloat(20 * game.data.width), height: CGFloat(20 * game.data.height))
+                }.frame(width: UIScreen.main.bounds.width)
             }
             Spacer()
             Button("^") {
@@ -32,7 +38,7 @@ struct Level: View {
             Button("v") {
                 game.down()
             }
-        }
+        }.scaledToFit()
     }
 }
 

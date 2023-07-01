@@ -14,10 +14,11 @@ struct ContentView: View {
             Background()
             switch currentView {
             case .menu: Menu(setCurrentView: setCurrentView)
-            case .level: Level(1)
+            case .level: Level(1).scaledToFit()
             case .selectLevel: Text("Select Level:")
             }
-        }.foregroundColor(.white)
+        }
+        .foregroundColor(.white)
     }
     
     func setCurrentView(view: CurrentView) {
