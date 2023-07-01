@@ -10,15 +10,24 @@ struct ContentView: View {
     @State private var currentView = CurrentView.menu
     
     var body: some View {
-        switch currentView {
-        case .menu: Menu(setCurrentView: setCurrentView)
-        case .level: Level(1)
-        case .selectLevel: Text("Select Level:")
-        }
+        ZStack {
+            Background()
+            switch currentView {
+            case .menu: Menu(setCurrentView: setCurrentView)
+            case .level: Level(1)
+            case .selectLevel: Text("Select Level:")
+            }
+        }.foregroundColor(.white)
     }
     
     func setCurrentView(view: CurrentView) {
         currentView = view
+    }
+}
+
+struct Background: View {
+    var body: some View {
+        Spacer().background(.black).scaledToFill()
     }
 }
 
