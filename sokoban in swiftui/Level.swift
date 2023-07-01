@@ -25,19 +25,19 @@ struct Level: View {
             Spacer()
             Button("^") {
                 game.up()
-            }
+            }.frame(width: 60, height: 60)
             HStack {
                 Button("<") {
                     game.left()
-                }
-                Text(" ")
+                }.frame(width: 60, height: 60)
+                Text(" ").frame(width: 60, height: 60)
                 Button(">") {
                     game.right()
-                }
+                }.frame(width: 60, height: 60)
             }
             Button("v") {
                 game.down()
-            }
+            }.frame(width: 60, height: 60)
         }.scaledToFit()
     }
 }
