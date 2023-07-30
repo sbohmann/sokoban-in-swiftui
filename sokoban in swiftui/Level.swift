@@ -25,20 +25,30 @@ struct Level: View {
             Spacer()
             Button("^") {
                 game.up()
-            }.frame(width: 60, height: 60)
+            }
+            .keyboardShortcut(.upArrow, modifiers: [])
+            .frame(width: 60, height: 60)
             HStack {
                 Button("<") {
                     game.left()
-                }.frame(width: 60, height: 60)
-                Text(" ").frame(width: 60, height: 60)
+                }
+                .keyboardShortcut(.leftArrow, modifiers: [])
+                .frame(width: 60, height: 60)
+                Text(" ")
+                    .frame(width: 60, height: 60)
                 Button(">") {
                     game.right()
-                }.frame(width: 60, height: 60)
+                }
+                .keyboardShortcut(.rightArrow, modifiers: [])
+                .frame(width: 60, height: 60)
             }
             Button("v") {
                 game.down()
-            }.frame(width: 60, height: 60)
-        }.scaledToFit()
+            }
+            .keyboardShortcut(.downArrow, modifiers: [])
+            .frame(width: 60, height: 60)
+        }
+        .scaledToFit()
     }
 }
 
