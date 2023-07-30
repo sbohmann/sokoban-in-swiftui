@@ -14,7 +14,10 @@ struct ContentView: View {
             Background()
             switch currentView {
             case .menu: Menu(setCurrentView: setCurrentView)
-            case .level: Level(1).scaledToFit()
+            case .level: Level(1) {
+                currentView = .menu
+            }
+            .scaledToFit()
             case .selectLevel: Text("Select Level:")
             }
         }

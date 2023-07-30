@@ -2,9 +2,11 @@ import SwiftUI
 
 struct Level: View {
     @State private var game: Game
+    private let exitLevel: () -> ()
     
-    init(_ number: Int) {
+    init(_ number: Int, _ exitLevel: @escaping () -> ()) {
         game = Game(data: loadLevel(number))
+        self.exitLevel = exitLevel
     }
     
     var body: some View {
@@ -23,11 +25,24 @@ struct Level: View {
                 }.frame(width: UIScreen.main.bounds.width)
             }
             Spacer()
-            Button("^") {
-                game.up()
+            HStack {
+                Button("<-") {
+                    exitLevel()
+                }
+                .keyboardShortcut(.escape, modifiers: [])
+                .frame(width: 60, height: 60)
+                Text(" ")
+                    .frame(width: 60, height: 60)
+                Button("^") {
+                    game.up()
+                }
+                .keyboardShortcut(.upArrow, modifiers: [])
+                .frame(width: 60, height: 60)
+                Text(" ")
+                    .frame(width: 60, height: 60)
+                Text(" ")
+                    .frame(width: 60, height: 60)
             }
-            .keyboardShortcut(.upArrow, modifiers: [])
-            .frame(width: 60, height: 60)
             HStack {
                 Button("<") {
                     game.left()
@@ -109,6 +124,6 @@ private struct Game {
 
 struct Level_Previews: PreviewProvider {
     static var previews: some View {
-        Level(1)
+        Level(1, {})
     }
 }
