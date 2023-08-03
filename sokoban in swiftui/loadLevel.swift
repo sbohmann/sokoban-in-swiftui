@@ -1,7 +1,7 @@
 import Foundation
 
 func loadLevel(_ number: Int) -> LevelData {
-    let levelFilePath = Bundle.main.path(forResource: "level\(number).txt", ofType: nil)!
+    let levelFilePath = Bundle.main.path(forResource: "\(number).txt", ofType: nil)!
     let levelDescription = try! String(contentsOfFile: levelFilePath)
     let lines = levelDescription
         .split(separator: "\n")

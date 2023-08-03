@@ -3,6 +3,7 @@ import SwiftUI
 struct Level: View {
     @State private var game: Game
     private let exitLevel: () -> ()
+    @State private var exitToMenuConfirmationDialogVisible = false
     
     init(_ number: Int, _ exitLevel: @escaping () -> ()) {
         game = Game(data: loadLevel(number))
@@ -14,9 +15,9 @@ struct Level: View {
             ScrollView(.vertical) {
                 ScrollView(.horizontal) {
                     VStack(spacing: 0) {
-                        ForEach(0 ..< game.data.height) { y in
+                        ForEach(0 ..< game.data.height, id: \.self) { y in
                             HStack(spacing: 0) {
-                                ForEach(0 ..< game.data.width) { x in
+                                ForEach(0 ..< game.data.width, id: \.self) { x in
                                     FieldView(data: game.data, position: (Position(x: x, y: y)))
                                 }
                             }
@@ -26,21 +27,29 @@ struct Level: View {
             }
             Spacer()
             HStack {
-                Button("<-") {
-                    exitLevel()
-                }
-                .keyboardShortcut(.escape, modifiers: [])
-                .frame(width: 60, height: 60)
-                Text(" ")
+                Button("<-", action:
+                {
+                    exitToMenuConfirmationDialogVisible = true
+                })
+                    .confirmationDialog(LocalizedStringKey(stringLiteral: "Exit to menu?"),
+                                        isPresented: $exitToMenuConfirmationDialogVisible) {
+                        Button("Exit") {
+                            exitLevel()
+                        }
+                        .frame(width: 10, height: 10)
+                    }
+                    .keyboardShortcut(.escape, modifiers: [])
+                    .frame(width: 60, height: 60)
+                Spacer()
                     .frame(width: 60, height: 60)
                 Button("^") {
                     game.up()
                 }
                 .keyboardShortcut(.upArrow, modifiers: [])
                 .frame(width: 60, height: 60)
-                Text(" ")
+                Spacer()
                     .frame(width: 60, height: 60)
-                Text(" ")
+                Spacer()
                     .frame(width: 60, height: 60)
             }
             HStack {
@@ -49,7 +58,7 @@ struct Level: View {
                 }
                 .keyboardShortcut(.leftArrow, modifiers: [])
                 .frame(width: 60, height: 60)
-                Text(" ")
+                Spacer()
                     .frame(width: 60, height: 60)
                 Button(">") {
                     game.right()
